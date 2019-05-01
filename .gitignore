@@ -16,6 +16,10 @@ HELP.md
 *.iws
 *.iml
 *.ipr
+
+### Maven ###
+mvnw
+mvnw.cmd
 .mvn
 
 ### NetBeans ###
