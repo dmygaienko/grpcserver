@@ -1,8 +1,6 @@
 package com.dmygaenko.grpcserver;
 
-import com.dmygaenko.grpcapi.HelloRequest;
-import com.dmygaenko.grpcapi.HelloResponse;
-import com.dmygaenko.grpcapi.HelloServiceGrpc;
+import com.dmygaenko.api.*;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
@@ -20,6 +18,18 @@ public class HelloService extends HelloServiceGrpc.HelloServiceImplBase {
                 .build();
 
         responseObserver.onNext(helloResponse);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void transferFile(FileRequest request, StreamObserver<FileResponse> responseObserver) {
+        log.info("TransferFile is called with request - {}", request);
+
+        FileResponse fileResponse = FileResponse.newBuilder()
+                .setGreeting("File is transferred, " + request.getFirstName())
+                .build();
+
+        responseObserver.onNext(fileResponse);
         responseObserver.onCompleted();
     }
 
